@@ -10,8 +10,7 @@ var closerLock sync.Mutex
 
 func ChanClaim(ch interface{}){
   closerLock.Lock()
-  defer closerLock.Unlock()
-  
+  defer closerLock.Unlock()  
   allClosers[ch]++
 }
 
