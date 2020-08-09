@@ -2,6 +2,7 @@ package chancloser
 
 import (
   "reflect"
+  "runtime"
   "sync"
   "log"
 )
@@ -17,6 +18,7 @@ Claims a channel for the Channel closer.
    defer ChanRelease(ch)
 */
 func ChanClaim(ch interface{}){
+  defer runtime.Gosched()
   closerLock.Lock()
   defer closerLock.Unlock()  
   if allClosers[ch]<0 {
