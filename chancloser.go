@@ -14,10 +14,10 @@ var closerLock sync.Mutex
 Claims a channel for the Channel closer.
  ch is a channel of any kind
  Usage:
-   ChanClaim(ch)
-   defer ChanRelease(ch)
+   Claim(ch)
+   defer Release(ch)
 */
-func ChanClaim(ch interface{}){
+func Claim(ch interface{}){
   defer runtime.Gosched()
   closerLock.Lock()
   defer closerLock.Unlock()  
@@ -32,7 +32,7 @@ func ChanClaim(ch interface{}){
 Releases the claim on the channel, if all current claims have been released, it will close the channel. 
 This function call should be a deferred call right after making the claim. 
  */
-func ChanRelease(ch interface{}){
+func Release(ch interface{}){
   closerLock.Lock()
   defer closerLock.Unlock()
   // fmt.Println("closing channel")

@@ -13,8 +13,8 @@ var running sync.WaitGroup
 func sender(ch chan int){
   running.Add(1)
   defer running.Done()
-  ChanClaim(ch)
-  defer ChanRelease(ch)
+  Claim(ch)
+  defer Release(ch)
   for i:=0;i<100;i++{
     ch <- i
   }
