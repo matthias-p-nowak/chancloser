@@ -5,7 +5,8 @@ import (
   "sync"
 )
 
-var allClosers map[interface{}]int=make(map[interface{}]int)
+var allClosers map[interface{}]int 
+  // =make(map[interface{}]int)
 var closerLock sync.Mutex
 
 func ChanClaim(ch interface{}){
@@ -24,4 +25,9 @@ func ChanRelease(ch interface{}){
     vo.Close()
     delete(allClosers,ch)
   }
+}
+
+func init(){
+  allClosers=make(map[interface{}]int)
+  // fmt.Println("chancloser initialized")
 }
