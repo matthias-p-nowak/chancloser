@@ -5,6 +5,7 @@ import (
   "runtime"
   "sync"
   "testing"
+  // "time"
 )
 
 var running sync.WaitGroup
@@ -14,6 +15,7 @@ func sender(ch chan int){
   defer running.Done()
   ChanClaim(ch)
   defer ChanRelease(ch)
+  // time.Sleep(200*time.Millisecond)
   for i:=0;i<100;i++{
     ch <- i
   }
